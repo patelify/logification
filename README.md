@@ -1,4 +1,4 @@
-Logification [![Build Status](https://travis-ci.org/NeMO84/logification.svg?branch=master)](https://travis-ci.org/NeMO84/logification) [![Dependency Status](https://gemnasium.com/NeMO84/logification.svg)](https://gemnasium.com/NeMO84/logification)
+Logification [![Build Status](https://travis-ci.org/NeMO84/logification.svg?branch=master)](https://travis-ci.org/NeMO84/logification) [![Dependency Status](https://gemnasium.com/NeMO84/logification.svg)](https://gemnasium.com/NeMO84/logification) [ ![Codeship Status for NeMO84/logification](https://codeship.io/projects/157d9720-19dd-0132-e3d3-3abb2747259b/status)](https://codeship.io/projects/34508)
 ============
 
 TODO: Write a gem description
