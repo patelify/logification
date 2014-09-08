@@ -16,6 +16,10 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'pry' if ENV["PRY"]
+
+require 'simplecov'
+SimpleCov.start
+
 require_relative "../lib/logification"
 
 RSpec.configure do |config|
