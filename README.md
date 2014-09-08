@@ -1,4 +1,4 @@
-Logification [![Build Status](https://travis-ci.org/NeMO84/logification.svg?branch=master)][Continuous Integration]
+Logification [![Build Status](https://travis-ci.org/NeMO84/logification.svg?branch=master)](https://travis-ci.org/NeMO84/logification)
 ============
 
 # Description
