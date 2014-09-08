@@ -22,3 +22,6 @@ tmp
 mkmf.log
 todo.txt
 .ruby-*
+.DS_store
+*.log
+test.rb

@@ -8,8 +8,8 @@ module Logification
     attr_accessor :base_logger
     attr_accessor :nested_count
 
-    include LoggingMethods
-    include Wrapper
+    include Helpers::LoggingMethods
+    include Helpers::Wrapper
 
     def initialize(options={})
       name = options[:name] || "logification"

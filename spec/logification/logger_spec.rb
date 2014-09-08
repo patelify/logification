@@ -58,4 +58,36 @@ describe Logification::Logger do
 
   end
 
+  describe "with nesting" do
+
+    let(:message) { "Test message" }
+    let(:tabbed_message) { Logification::Logger::TAB + message }
+
+    it "#debug(message)" do
+      subject.nested_count = 1
+      expect(subject.debug{message}).to eql(tabbed_message)
+    end
+
+    it "#info(message)" do
+      subject.nested_count = 1
+      expect(subject.info{message}).to eql(tabbed_message)
+    end
+
+    it "#warn(message)" do
+      subject.nested_count = 1
+      expect(subject.warn{message}).to eql(tabbed_message)
+    end
+
+    it "#error(message)" do
+      subject.nested_count = 1
+      expect(subject.error{message}).to eql(tabbed_message)
+    end
+
+    it "#fatal(message)" do
+      subject.nested_count = 1
+      expect(subject.fatal{message}).to eql(tabbed_message)
+    end
+
+  end
+
 end
