@@ -1,4 +1,5 @@
 require "logification/version"
+require "logification/helpers"
 require "logification/logger"
 
 # http://stackoverflow.com/questions/5799823/ruby-uninitialized-constant-log4rdebug-nameerror-problem/5800326#5800326
