@@ -17,8 +17,13 @@
 
 require 'pry' if ENV["PRY"]
 
-require 'simplecov'
-SimpleCov.start
+if ENV["CODECLIMATE"]
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+else
+  require 'simplecov'
+  SimpleCov.start
+end
 
 require_relative "../lib/logification"
 
