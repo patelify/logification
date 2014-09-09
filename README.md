@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Sample Usage
 
-```rubys
+```ruby
 require "logification"
 
 # Nested logging (nested_tabbing is enabled by default)
