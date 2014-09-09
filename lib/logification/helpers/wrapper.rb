@@ -7,11 +7,11 @@ module Logification
       def wrap(name, options={})
         settings = base_options.merge!(options)
         settings.merge!(name: name)
-        self.send(settings[:level], start_message(settings))
+        self.send(settings[:wrap_level], start_message(settings))
         nested_logger = self.dup
         nested_logger.nested_count = self.nested_count+1 if settings[:nested_tabbing]
         block_response = yield(nested_logger) if block_given?
-        self.send(settings[:level], end_message(settings))
+        self.send(settings[:wrap_level], end_message(settings))
         block_response
       end
 
@@ -20,7 +20,7 @@ module Logification
       def base_options
         {
           nested_tabbing: true,
-          level: :info,
+          wrap_level: :info,
           start_time: Time.now
         }
       end
