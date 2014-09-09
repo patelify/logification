@@ -1,5 +1,7 @@
-Logification [![Gem Version](https://badge.fury.io/rb/logification.svg)](http://badge.fury.io/rb/logification) [![Build Status](https://travis-ci.org/NeMO84/logification.svg?branch=master)](https://travis-ci.org/NeMO84/logification) [![Dependency Status](https://gemnasium.com/NeMO84/logification.svg)](https://gemnasium.com/NeMO84/logification) [![Code Climate](https://codeclimate.com/github/NeMO84/logification/badges/gpa.svg)](https://codeclimate.com/github/NeMO84/logification) [![Test Coverage](https://codeclimate.com/github/NeMO84/logification/badges/coverage.svg)](https://codeclimate.com/github/NeMO84/logification)
+Logification
 ============
+
+[![Gem Version](https://badge.fury.io/rb/logification.svg)](http://badge.fury.io/rb/logification) [![Build Status](https://travis-ci.org/NeMO84/logification.svg?branch=master)](https://travis-ci.org/NeMO84/logification) [![Dependency Status](https://gemnasium.com/NeMO84/logification.svg)](https://gemnasium.com/NeMO84/logification) [![Code Climate](https://codeclimate.com/github/NeMO84/logification/badges/gpa.svg)](https://codeclimate.com/github/NeMO84/logification) [![Test Coverage](https://codeclimate.com/github/NeMO84/logification/badges/coverage.svg)](https://codeclimate.com/github/NeMO84/logification)
 
 Logification is an abstracted logging gem library. Its purpose is to not only simply logging, but also to enhance. Some added benefits: wrapping, color coating output (terminal only for now) and more to come.
 
