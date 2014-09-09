@@ -13,7 +13,7 @@ module Logification
 
     def initialize(options={})
       name = options[:name] || "logification"
-      @base_logger = options[:logger] || default_logger(name)
+      @base_logger = options[:base_logger] || default_logger(name)
     end
 
     def default_logger(name)

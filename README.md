@@ -1,7 +1,11 @@
 Logification [![Build Status](https://travis-ci.org/NeMO84/logification.svg?branch=master)](https://travis-ci.org/NeMO84/logification) [![Dependency Status](https://gemnasium.com/NeMO84/logification.svg)](https://gemnasium.com/NeMO84/logification) [![Code Climate](https://codeclimate.com/github/NeMO84/logification/badges/gpa.svg)](https://codeclimate.com/github/NeMO84/logification) [![Test Coverage](https://codeclimate.com/github/NeMO84/logification/badges/coverage.svg)](https://codeclimate.com/github/NeMO84/logification)
 ============
 
-TODO: Write a gem description
+Logification is an abstracted logging gem library. Its purpose is to not only simply logging, but also to enhance. Some added benefits: wrapping, color coating output (terminal only for now) and more to come.
+
+Logification's purpose to enhance existing libraries. It assumes that existing logging library support the following levels debug, info, warn, error, fatal.
+
+Currently, logification has been integrated with Log4r. But future goals are to make it even more abstract so there is no dependency on one specific library.
 
 ## Installation
 
@@ -11,15 +15,55 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
     $ gem install logification
 
-## Usage
+## Sample Usage
 
-TODO: Write usage instructions here
+require "logification"
+
+    # Nested logging (nested_tabbing is enabled by default)
+    Logification.logger.wrap("SomeTask", nested_tabbing: false) do |logger|
+
+      logger.debug "Working on task"
+      logger.warn "Working on task"
+
+      # The below output should be nested
+      logger.wrap("SomeSubTask") do |nested_logger|
+        nested_logger.error "Working on sub task"
+        nested_logger.fatal "Working on sub task"
+      end
+
+    end
+
+    # Custom logging
+    # (assumes ExistingLogger responds to above listed levels and 'level' instance method call)
+    logger = Logification::Logger(name: "myproject", base_logger: ExistingLogger.new)
+    logger.debug "This should be color formatted now"
+    logger.wrap("ImagePostProcessing: 123") do |nested_logger|
+      nested_logger.debug "Image has been initialized"
+      nested_logger.debug "Image has been resized"
+      nested_logger.debug "Updated image has been uploaded"
+    end
+
+
+## TODO
+
+  - Update README
+  - Add error handling, logging should be conspicuous.
+  - Remove dependency on log4r
+  - Think up more TODO items
+  - Make log level colors configurable
+  - Improve testing by writing more micro functional tests
+
+
+## Known Issues
+
+TODO:
+
 
 ## Contributing
 
