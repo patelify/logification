@@ -40,6 +40,16 @@ Logification.logger.wrap("SomeTask", nested_tabbing: false) do |logger|
 
 end
 
+# Terminal output should be color coated
+#=> 2014-09-08 18:19:14 INFO [logification] - Starting 'SomeTask':
+#=> 2014-09-08 18:19:14 DEBU [logification] - Working on task
+#=> 2014-09-08 18:19:14 WARN [logification] - Working on task
+#=> 2014-09-08 18:19:14 INFO [logification] - Starting 'SomeSubTask':
+#=> 2014-09-08 18:19:14 ERRO [logification] -     Working on sub task
+#=> 2014-09-08 18:19:14 FATA [logification] -     Working on sub task
+#=> 2014-09-08 18:19:14 INFO [logification] - Completed 'SomeSubTask' in 0.0s
+#=> 2014-09-08 18:19:14 INFO [logification] - Completed 'SomeTask' in 0.0s
+
 # Custom logging
 # Assumes BasicLogger responds to above listed levels and 'level' instance method call)
 class BasicLogger
@@ -60,6 +70,14 @@ logger.wrap("ImagePostProcessing: 123") do |nested_logger|
   sleep(1) # upload
   nested_logger.debug "Updated image has been uploaded"
 end
+
+# Terminal output should be color coated
+#=> This should be color formatted now
+#=> Starting 'ImagePostProcessing: 123':
+#=>     Image has been initialized
+#=>     Image has been resized
+#=>     Updated image has been uploaded
+#=> Completed 'ImagePostProcessing: 123' in 2.002s
 ```
 
 ## TODO
