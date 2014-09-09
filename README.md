@@ -40,12 +40,24 @@ require "logification"
     end
 
     # Custom logging
-    # (assumes ExistingLogger responds to above listed levels and 'level' instance method call)
-    logger = Logification::Logger(name: "myproject", base_logger: ExistingLogger.new)
+    # Assumes BasicLogger responds to above listed levels and 'level' instance method call)
+    #
+    class BasicLogger
+      attr_accessor :level
+      def debug(msg); puts msg; end
+      def info(msg); puts msg; end
+      def warn(msg); puts msg; end
+      def error(msg); puts msg; end
+      def fatal(msg); puts msg; end
+    end
+
+    logger = Logification::Logger.new(name: "myproject", base_logger: BasicLogger.new)
     logger.debug "This should be color formatted now"
     logger.wrap("ImagePostProcessing: 123") do |nested_logger|
       nested_logger.debug "Image has been initialized"
+      sleep(1) # resize
       nested_logger.debug "Image has been resized"
+      sleep(1) # upload
       nested_logger.debug "Updated image has been uploaded"
     end
 

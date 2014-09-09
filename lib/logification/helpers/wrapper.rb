@@ -34,7 +34,7 @@ module Logification
       end
 
       def summary_message(options={})
-        "Completed '#{options[:name]}' in #{(Time.now - options[:start_time]).to_i}s"
+        "Completed '#{options[:name]}' in #{(Time.now - options[:start_time]).round(3)}s"
       end
 
     end
