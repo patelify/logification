@@ -49,7 +49,7 @@ describe Logification::Helpers::LoggingMethods do
 
     subject {
       Logification::Logger.new(name: "test").tap do |l|
-        #l.base_logger.outputters = []
+        l.base_logger.outputters = []
       end
     }
 
