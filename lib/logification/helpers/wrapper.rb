@@ -8,7 +8,7 @@ module Logification
         settings = base_options.merge!(options)
         settings.merge!(name: name)
         self.send(settings[:wrap_level], start_message(settings))
-        nested_logger = self.dup
+        nested_logger = self.clone
         nested_logger.nested_count = self.nested_count+1 if settings[:nested_tabbing]
         block_response = yield(nested_logger) if block_given?
         self.send(settings[:wrap_level], end_message(settings))

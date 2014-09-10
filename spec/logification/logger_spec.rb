@@ -1,10 +1,32 @@
 describe Logification::Logger do
 
   subject {
-    l = Logification::Logger.new(name: "test")
-    l.base_logger.outputters = []
-    l
+    Logification::Logger.new(name: "test").tap do |l|
+      l.base_logger.outputters = []
+    end
   }
+
+  describe "settings" do
+
+    it "#level" do
+      expect{subject.level}.not_to raise_error
+    end
+
+    it "#level=" do
+      subject.level = :debug
+      expect(subject.level).to eql(:debug)
+    end
+
+    it "#nested_count" do
+      expect(subject.nested_count).to eql(0)
+    end
+
+    it "#nested_count incremented" do
+      expect(subject.nested_count+=1).to eql(1)
+      subject.nested_count = 0
+    end
+
+  end
 
   describe "with message paramater" do
 
@@ -86,6 +108,18 @@ describe Logification::Logger do
     it "#fatal(message)" do
       subject.nested_count = 1
       expect(subject.fatal{message}).to eql(tabbed_message)
+    end
+
+  end
+
+  describe "helper methods" do
+
+    it "#duplicate value" do
+      expect(subject.duplicate("duplicated")).not_to be_nil
+    end
+
+    it "#duplicate class" do
+      expect(subject.duplicate("duplicated").class).to eql(Logification::Logger)
     end
 
   end
