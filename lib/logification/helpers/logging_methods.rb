@@ -31,10 +31,6 @@ module Logification
         log_message(:fatal, msg, :magenta)
       end
 
-      def is_nested?
-        not nested_count.nil? and nested_count > 0
-      end
-
     private
 
       def log_message(type, msg, color)
@@ -44,13 +40,22 @@ module Logification
       end
 
       def messagify(msg)
+        if msg.is_a?(Exception)
+          exception = msg
+          error_message = "Caught #{exception.class}: #{exception.message}"
+          msg = [error_message, exception.backtrace].join("\n")
+        end
         tabify(msg)
       end
 
       def tabify(msg)
         return msg unless is_nested?
-        tab = TAB * nested_count # tab = 4 spaces
+        tab = TAB * self.nested_count # tab = 4 spaces
         tab + msg
+      end
+
+      def is_nested?
+        not self.nested_count.nil? and self.nested_count > 0
       end
 
     end
