@@ -23,7 +23,7 @@ Or install it yourself as:
 
     $ gem install logification
 
-## Sample Usage
+## Usage
 
 ```ruby
 require "logification"
