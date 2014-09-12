@@ -25,6 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov", "~> 0.7"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 0.4"
 
-  spec.add_dependency "log4r", "~> 1.1"
   spec.add_dependency "colorize", "~> 0.7"
 end

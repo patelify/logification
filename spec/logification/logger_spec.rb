@@ -2,7 +2,7 @@ describe Logification::Logger do
 
   subject {
     Logification::Logger.new(name: "test").tap do |l|
-      l.base_logger.outputters = []
+      l.level = :disabled
     end
   }
 
@@ -24,6 +24,36 @@ describe Logification::Logger do
     it "#nested_count incremented" do
       expect(subject.nested_count+=1).to eql(1)
       subject.nested_count = 0
+    end
+
+  end
+
+  describe "inspect level state" do
+
+    it "#debug?" do
+      subject.level = :debug
+      expect(subject.debug?).to eql(true)
+    end
+
+
+    it "#info?" do
+      subject.level = :info
+      expect(subject.info?).to eql(true)
+    end
+
+    it "#warn?" do
+      subject.level = :warn
+      expect(subject.warn?).to eql(true)
+    end
+
+    it "#error?" do
+      subject.level = :error
+      expect(subject.error?).to eql(true)
+    end
+
+    it "#fatal?" do
+      subject.level = :fatal
+      expect(subject.fatal?).to eql(true)
     end
 
   end

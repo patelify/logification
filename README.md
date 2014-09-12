@@ -7,7 +7,6 @@ Logification is an abstracted logging gem library. Its purpose is to simplyify a
 
 Logification's purpose is to enhance existing libraries by providing features on top of their general output. It currently makes an assumption that the base logging library supports the following levels debug, info, warn, error, fatal.
 
-Logification has been integrated with the already very powerful Log4r. But future goals are to make it even less dependent on any specific logging library.
 
 ## Installation
 
@@ -93,7 +92,6 @@ end
 
   - Update README
   - Add error handling, logging should be conspicuous.
-  - Remove dependency on log4r
   - Think up more TODO items
   - Make log level colors configurable
   - Improve testing by writing more micro functional tests

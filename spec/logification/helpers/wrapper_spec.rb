@@ -2,17 +2,17 @@ describe Logification::Helpers::Wrapper do
 
   let(:klass) {
     class LoggingKlass
-      attr_accessor :base_logger, :nested_count
+      attr_accessor :base_logger, :nested_count, :level
       include Logification::Helpers::Wrapper
       def initialize
-        @base_logger = Log4r::Logger.new(self.class.to_s)
+        @base_logger = ::Logger.new(STDERR)
         @nested_count = 0
       end
     end
     LoggingKlass
   }
 
-  subject(:instance) { klass.new }
+  subject(:instance) { klass.new.tap do |l| l.level = :disabled end }
 
   it "#wrap" do
     expect(instance.public_methods.include?(:wrap)).to eql(true)

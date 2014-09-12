@@ -1,8 +1,4 @@
-require "colorize"
-require "log4r"
-
-# http://stackoverflow.com/questions/5799823/ruby-uninitialized-constant-log4rdebug-nameerror-problem/5800326#5800326
-Log4r.define_levels(*Log4r::Log4rConfig::LogLevels)
+require "logger"
 
 module Logification
 
@@ -21,11 +17,10 @@ module Logification
     end
 
     def default_logger(name)
-      Log4r::Logger.new(name).tap do |l|
-        l.outputters = Log4r::Outputter.stdout.tap do |o|
-          o.formatter = Log4r::PatternFormatter.new(pattern: "%d %.04l [%C] - %M")
-        end
-        l.level = translate_level(:debug)
+      ::Logger.new(STDOUT).tap do |l|
+        l.level = translate_level_in(:debug)
+        l.formatter = Logification::Formatters::Colorized.new
+        l.progname = self.name
       end
     end
 
@@ -34,17 +29,36 @@ module Logification
     end
 
     def level
-      LOG4R_LEVEL_TRANSLATION.key(base_logger.level)
+      translate_level_out(base_logger.level)
     end
 
     def level=(value)
-      base_logger.level = translate_level(value)
-      @level = value
+      base_logger.level = translate_level_in(value)
     end
 
     def duplicate(name, options={})
       settings = current_settings.merge(options)
       self.class.new(settings.merge(name: name))
+    end
+
+    def method_missing(meth, *args, &block)
+      begin
+        if block_given?
+          if args.empty?
+            base_logger.send(meth) { block }
+          else
+            base_logger.send(meth, *args, &block)
+          end
+        else
+          if args.empty?
+            base_logger.send(meth)
+          else
+            base_logger.send(meth, *args)
+          end
+        end
+      rescue NoMethodError => ex
+        super
+      end
     end
 
   private
@@ -57,7 +71,17 @@ module Logification
       }
     end
 
+    LOGGER_LEVEL_TRANSLATION = {
+      :disabled => -1,
+      :debug => 0,
+      :info => 1,
+      :warn => 2,
+      :error => 3,
+      :fatal => 4
+    }
+
     LOG4R_LEVEL_TRANSLATION = {
+      :disabled => -1,
       :debug => 1,
       :info => 2,
       :warn => 3,
@@ -65,8 +89,20 @@ module Logification
       :fatal => 5
     }
 
-    def translate_level(lvl)
-      LOG4R_LEVEL_TRANSLATION[lvl.to_s.to_sym]
+    def translate_level_in(lvl)
+      if self.class.to_s =~ /Log4r/
+        LOG4R_LEVEL_TRANSLATION[lvl.to_s.to_sym]
+      else
+        LOGGER_LEVEL_TRANSLATION[lvl.to_s.to_sym]
+      end
+    end
+
+    def translate_level_out(lvl)
+      if self.base_logger.class.to_s =~ /Log4r/
+        LOG4R_LEVEL_TRANSLATION.key(lvl)
+      else
+        LOGGER_LEVEL_TRANSLATION.key(lvl)
+      end
     end
 
   end

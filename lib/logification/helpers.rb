@@ -1,2 +1,2 @@
-require_relative "helpers/logging_methods"
-require_relative "helpers/wrapper"
+require "logification/helpers/logging_methods"
+require "logification/helpers/wrapper"

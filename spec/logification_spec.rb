@@ -9,9 +9,10 @@ describe Logification do
   end
 
   it ".logger=" do
+    class LoggingKlass; end
     saved_logger = subject.logger
-    subject.logger = Log4r::Logger.new("test")
-    expect(subject.logger.class).to eql(Log4r::Logger)
+    subject.logger = LoggingKlass.new
+    expect(subject.logger.class).to eql(LoggingKlass)
     subject.logger = saved_logger
   end
 

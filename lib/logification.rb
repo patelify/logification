@@ -1,6 +1,7 @@
 require "logification/version"
 require "logification/helpers"
 require "logification/logger"
+require "logification/formatters"
 
 module Logification
 
