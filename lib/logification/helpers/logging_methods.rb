@@ -38,6 +38,7 @@ module Logification
       end
 
       def log_message(type, msg, color)
+        return msg if msg.nil?
         msg = messagify(msg)
         return msg if is_disabled?
         self.base_logger.send(type, msg.to_s.send(color))
